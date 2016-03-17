@@ -20,6 +20,7 @@ async function isAlive(uri) {
   try {
     const res = await fetch(uri, {
       method: 'HEAD',
+      gzip: false,
     });
     return {
       ok: res.ok,
