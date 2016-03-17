@@ -1,0 +1,45 @@
+{
+  "name": "textlint-rule-no-dead-link",
+  "version": "0.1.0",
+  "description": "A textlint rule to check if all links are alive",
+  "main": "lib/no-dead-link.js",
+  "scripts": {
+    "build": "babel src -d lib --source-maps",
+    "prepublish": "npm run --if-present build",
+    "test": "npm-run-all lint mocha",
+    "lint": "eslint src test",
+    "mocha": "mocha"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "textlint",
+    "rule"
+  ],
+  "author": "nodaguti",
+  "license": "MIT",
+  "bugs": "https://github.com/nodaguti/textlint-rule-no-dead-link/issues",
+  "homepage": "https://github.com/nodaguti/textlint-rule-no-dead-link",
+  "repository": "nodaguti/textlint-rule-no-dead-link",
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "npm-run-all": "^1.5.3",
+    "textlint-rule-helper": "^1.1.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.2",
+    "babel-eslint": "^5.0.0",
+    "babel-plugin-espower": "^2.1.2",
+    "babel-plugin-transform-async-to-generator": "^6.7.0",
+    "babel-preset-es2015": "^6.6.0",
+    "eslint": "~2.2.0",
+    "eslint-config-airbnb": "^6.1.0",
+    "mocha": "^2.4.5",
+    "power-assert": "^1.3.1",
+    "textlint": "^5.7.0",
+    "textlint-tester": "^1.0.0"
+  }
+}
