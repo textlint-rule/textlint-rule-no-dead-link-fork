@@ -8,6 +8,10 @@ tester.run('no-dead-link', rule, {
     'Normal URI: https://example.com/',
     'Normal link: [example](https://example.com/)',
     {
+      text: 'an URI in a plain text: https://example.com/ is one example.',
+      ext: '.txt',
+    },
+    {
       text: 'Options: relative link: ![robot](index.html)',
       options: {
         checkRelative: true,
