@@ -28,15 +28,15 @@ function isRelative(uri) {
  */
 async function isAlive(uri) {
   try {
-    const res = await fetch(uri, {
+    const opts = {
       method: 'HEAD',
-      headers: {
-        // Disable gzip compression to avoid
-        // the zlib's "unexpected end of file" error
-        // https://github.com/request/request/issues/2045
-        'Accept-Encoding': 'identity',
-      },
-    });
+      // Disable gzip compression in Node.js
+      // to avoid the zlib's "unexpected end of file" error
+      // https://github.com/request/request/issues/2045
+      compress: false,
+    };
+    const res = await fetch(uri, opts);
+
     return {
       ok: res.ok,
       message: `${res.status} ${res.statusText}`,
@@ -93,40 +93,50 @@ function reporter(context, options = {}) {
     }
   };
 
+  /**
+   * URIs to be checked.
+   * @type {Array<{ node: TextLintNode, uri: string, index: number }>}
+   */
+  const URIs = [];
+
   return {
     [Syntax.Str](node) {
       if (helper.isChildNode(node, [Syntax.BlockQuote])) {
-        return null;
+        return;
       }
 
       // prevent double checks
       if (helper.isChildNode(node, [Syntax.Link])) {
-        return null;
+        return;
       }
 
-      return (async () => {
-        const text = getSource(node);
-        let matched;
+      const text = getSource(node);
+      let matched;
 
-        // eslint-disable-next-line no-cond-assign
-        while ((matched = URI_REGEXP.exec(text))) {
-          const uri = matched[0];
-          const index = matched.index;
-          await lint({ node, uri, index });
-        }
-      })();
+      // eslint-disable-next-line no-cond-assign
+      while ((matched = URI_REGEXP.exec(text))) {
+        const uri = matched[0];
+        const index = matched.index;
+        URIs.push({ node, uri, index });
+      }
     },
 
     [Syntax.Link](node) {
       if (helper.isChildNode(node, [Syntax.BlockQuote])) {
-        return null;
+        return;
       }
 
-      return lint({
+      URIs.push({
         node,
         uri: node.url,
         index: 0,
       });
+    },
+
+    [`${context.Syntax.Document}:exit`]() {
+      return Promise.all(
+        URIs.map((item) => lint(item))
+      );
     },
   };
 }
