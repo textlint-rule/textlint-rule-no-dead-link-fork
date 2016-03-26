@@ -15,6 +15,10 @@ tester.run('no-dead-link', rule, {
       ext: '.txt',
     },
     {
+      text: 'should be able to check multiple URLs in a plain text: https://example.com/, http://httpstat.us/200',
+      ext: '.txt',
+    },
+    {
       text: 'should be able to check relative pathes when checkRelative is true: ![robot](index.html)',
       options: {
         checkRelative: true,
@@ -46,6 +50,17 @@ tester.run('no-dead-link', rule, {
           message: 'http://httpstat.us/500 is dead. (500 Internal Server Error)',
           line: 1,
           column: 49,
+        },
+      ],
+    },
+    {
+      text: 'should locate the exact index of a URL in a plain text: https://example.com/404.html',
+      ext: '.txt',
+      errors: [
+        {
+          message: 'https://example.com/404.html is dead. (404 Not Found)',
+          line: 1,
+          column: 57,
         },
       ],
     },

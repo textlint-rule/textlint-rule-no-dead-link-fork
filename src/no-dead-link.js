@@ -44,7 +44,7 @@ function reporter(context, options = {}) {
   const helper = new RuleHelper(context);
   const opts = Object.assign({}, DEFAULT_OPTIONS, options);
 
-  const lint = async (node, uri) => {
+  const lint = async ({ node, uri, index }) => {
     if (opts.ignore.indexOf(uri) !== -1) {
       return;
     }
@@ -68,7 +68,7 @@ function reporter(context, options = {}) {
 
     if (!ok) {
       const message = `${uri} is dead. (${msg})`;
-      report(node, new RuleError(message, { index: 0 }));
+      report(node, new RuleError(message, { index }));
     }
   };
 
@@ -85,14 +85,13 @@ function reporter(context, options = {}) {
 
       return (async () => {
         const text = getSource(node);
-        const uris = text.match(URI_REGEXP);
+        let matched;
 
-        if (!uris) {
-          return;
-        }
-
-        for (const uri of uris) {
-          await lint(node, uri);
+        // eslint-disable-next-line no-cond-assign
+        while ((matched = URI_REGEXP.exec(text))) {
+          const uri = matched[0];
+          const index = matched.index;
+          await lint({ node, uri, index });
         }
       })();
     },
@@ -102,7 +101,11 @@ function reporter(context, options = {}) {
         return null;
       }
 
-      return lint(node, node.url);
+      return lint({
+        node,
+        uri: node.url,
+        index: 0,
+      });
     },
   };
 }
