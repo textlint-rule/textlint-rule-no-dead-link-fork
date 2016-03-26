@@ -3,19 +3,29 @@ import fetch from 'isomorphic-fetch';
 import URL from 'url';
 
 const DEFAULT_OPTIONS = {
-  checkRelative: false,
-  baseURI: null,
-  ignore: [],
+  checkRelative: false,  // should check relative URLs.
+  baseURI: null,  // a base URI to resolve a relative URL.
+  ignore: [],  // URIs to be skipped from availability checks.
 };
 
 // http://stackoverflow.com/a/3809435/951517
 // eslint-disable-next-line max-len
 const URI_REGEXP = /(https?:)?\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
 
+/**
+ * Returns `true` if a given URI is relative.
+ * @param {string} uri
+ * @return {Boolean}
+ */
 function isRelative(uri) {
   return URL.parse(uri).protocol === null;
 }
 
+/**
+ * Checks if a given URI is alive or not.
+ * @param {string} uri
+ * @return {{ ok: bool, message: string }}
+ */
 async function isAlive(uri) {
   try {
     const res = await fetch(uri, {
@@ -49,6 +59,12 @@ function reporter(context, options = {}) {
   const helper = new RuleHelper(context);
   const opts = Object.assign({}, DEFAULT_OPTIONS, options);
 
+  /**
+   * Checks a given URI's availability and report if it is dead.
+   * @param {TextLintNode} node TextLintNode the URI belongs to.
+   * @param {string} uri a URI string to be linted.
+   * @param {number} index column number the URI is located at.
+   */
   const lint = async ({ node, uri, index }) => {
     if (opts.ignore.indexOf(uri) !== -1) {
       return;

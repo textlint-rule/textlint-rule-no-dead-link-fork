@@ -56,7 +56,7 @@ Example:
 ```
 
 ### ignore
-URI strings to be ignored.
+An array of URI string to be ignored, i.e. skipped from availability checks.
 
 Example:
 ```
