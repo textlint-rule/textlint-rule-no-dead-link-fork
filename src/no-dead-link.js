@@ -20,7 +20,12 @@ async function isAlive(uri) {
   try {
     const res = await fetch(uri, {
       method: 'HEAD',
-      gzip: false,
+      headers: {
+        // Disable gzip compression to avoid
+        // the zlib's "unexpected end of file" error
+        // https://github.com/request/request/issues/2045
+        'Accept-Encoding': 'identity',
+      },
     });
     return {
       ok: res.ok,
