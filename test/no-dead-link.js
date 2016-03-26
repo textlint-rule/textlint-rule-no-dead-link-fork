@@ -5,21 +5,22 @@ const tester = new TextlintTester();
 
 tester.run('no-dead-link', rule, {
   valid: [
-    'Normal URI: https://example.com/',
-    'Normal link: [example](https://example.com/)',
+    'Markdown > Link: [example](https://example.com/)',
+    'Markdown > URL: https://example.com/',
+
     {
-      text: 'an URI in a plain text: https://example.com/ is one example.',
+      text: 'Plain Text > URL: https://example.com/',
       ext: '.txt',
     },
     {
-      text: 'Options: relative link: ![robot](index.html)',
+      text: 'Options > checkRelative: ![robot](index.html)',
       options: {
         checkRelative: true,
         baseURI: 'https://example.com/',
       },
     },
     {
-      text: 'Options: ignore: https://example.com/404.html',
+      text: 'Options > ignore: https://example.com/404.html shouldn\'t be checked.',
       options: {
         ignore: ['https://example.com/404.html'],
       },
@@ -27,27 +28,27 @@ tester.run('no-dead-link', rule, {
   ],
   invalid: [
     {
-      text: '404 URI: https://example.com/404.html',
+      text: 'Markdown > URL > 404: https://example.com/404.html',
       errors: [
         {
           message: 'https://example.com/404.html is dead. (404 Not Found)',
           line: 1,
-          column: 10,
+          column: 23,
         },
       ],
     },
     {
-      text: '404 link: [404](https://example.com/404.html)',
+      text: 'Markdown > Link > 404: [404](https://example.com/404.html)',
       errors: [
         {
           message: 'https://example.com/404.html is dead. (404 Not Found)',
           line: 1,
-          column: 11,
+          column: 24,
         },
       ],
     },
     {
-      text: 'No base URI for relative URI: [no base](index.html)',
+      text: 'Options > checkRelative > No base URI is provided: [no base](index.html)',
       options: {
         checkRelative: true,
       },
@@ -55,7 +56,7 @@ tester.run('no-dead-link', rule, {
         {
           message: 'The base URI is not specified.',
           line: 1,
-          column: 31,
+          column: 52,
         },
       ],
     },
