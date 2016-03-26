@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import rule from '../src/no-dead-link';
 import TextlintTester from 'textlint-tester';
 
@@ -5,22 +6,23 @@ const tester = new TextlintTester();
 
 tester.run('no-dead-link', rule, {
   valid: [
-    'Markdown > Link: [example](https://example.com/)',
-    'Markdown > URL: https://example.com/',
-
+    'should be able to check a link in Markdown: [example](https://example.com/)',
+    'should be able to check a URL in Markdown: https://example.com/',
+    'should treat 200 OK as alive: http://httpstat.us/200',
+    'should treat 301 Moved Permanently as alive: http://httpstat.us/301',
     {
-      text: 'Plain Text > URL: https://example.com/',
+      text: 'should be able to check a URL in a plain text: https://example.com/',
       ext: '.txt',
     },
     {
-      text: 'Options > checkRelative: ![robot](index.html)',
+      text: 'should be able to check relative pathes when checkRelative is true: ![robot](index.html)',
       options: {
         checkRelative: true,
         baseURI: 'https://example.com/',
       },
     },
     {
-      text: 'Options > ignore: https://example.com/404.html shouldn\'t be checked.',
+      text: 'should ignore URLs in the "ignore" option: https://example.com/404.html shouldn\'t be checked.',
       options: {
         ignore: ['https://example.com/404.html'],
       },
@@ -28,27 +30,27 @@ tester.run('no-dead-link', rule, {
   ],
   invalid: [
     {
-      text: 'Markdown > URL > 404: https://example.com/404.html',
+      text: 'should treat 404 Not Found as dead: https://example.com/404.html',
       errors: [
         {
           message: 'https://example.com/404.html is dead. (404 Not Found)',
           line: 1,
-          column: 23,
+          column: 37,
         },
       ],
     },
     {
-      text: 'Markdown > Link > 404: [404](https://example.com/404.html)',
+      text: 'should treat 500 Internal Server Error as dead: http://httpstat.us/500',
       errors: [
         {
-          message: 'https://example.com/404.html is dead. (404 Not Found)',
+          message: 'http://httpstat.us/500 is dead. (500 Internal Server Error)',
           line: 1,
-          column: 24,
+          column: 49,
         },
       ],
     },
     {
-      text: 'Options > checkRelative > No base URI is provided: [no base](index.html)',
+      text: 'should throw "No base URI is provided" error if checkRelative is true but baseURI is undefined: [no base](index.html)',
       options: {
         checkRelative: true,
       },
@@ -56,7 +58,7 @@ tester.run('no-dead-link', rule, {
         {
           message: 'The base URI is not specified.',
           line: 1,
-          column: 52,
+          column: 97,
         },
       ],
     },
