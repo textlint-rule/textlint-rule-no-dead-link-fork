@@ -25,7 +25,7 @@
   "repository": "nodaguti/textlint-rule-no-dead-link",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
-    "textlint-rule-helper": "^1.2.0"
+    "textlint-rule-helper": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
