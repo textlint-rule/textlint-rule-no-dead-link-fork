@@ -5,9 +5,9 @@
 [![devDependency Status](https://david-dm.org/nodaguti/textlint-rule-no-dead-link/dev-status.svg)](https://david-dm.org/nodaguti/textlint-rule-no-dead-link#info=devDependencies)
 
 [textlint](https://github.com/textlint/textlint) rule
-to check if all links are alive.
+to make sure every links is available.
 
-This rule is mainly for Markdown documents, but it may also work for plain texts.
+The primary target of this rule is Markdown documents, while it may also work for plain text documents (See tests).
 
 ## Installation
 ```
@@ -21,7 +21,7 @@ $ textlint --rule textlint-rule-no-dead-link text-to-check.txt
 ```
 
 ## Options
-Write your configurations into `.textlintrc`.
+Please write your configurations into `.textlintrc`.
 
 The default options are:
 ```
@@ -38,7 +38,7 @@ The default options are:
 
 ### checkRelative
 Enable the dead link checks against relative URIs.
-Note that you also have to specify the `baseURI`.
+Note that you also have to specify the `baseURI` to work this option.
 
 ### baseURI
 The base URI to use for all relative URIs contained within a document.
