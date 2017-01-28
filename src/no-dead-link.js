@@ -10,7 +10,7 @@ const DEFAULT_OPTIONS = {
 
 // http://stackoverflow.com/a/3809435/951517
 // eslint-disable-next-line max-len
-const URI_REGEXP = /(https?:)?\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+const URI_REGEXP = /(https?:)?\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g;
 
 /**
  * Returns `true` if a given URI is relative.
@@ -135,7 +135,7 @@ function reporter(context, options = {}) {
 
     [`${context.Syntax.Document}:exit`]() {
       return Promise.all(
-        URIs.map((item) => lint(item))
+        URIs.map((item) => lint(item)),
       );
     },
   };

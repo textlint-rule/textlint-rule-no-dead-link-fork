@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import rule from '../src/no-dead-link';
 import TextlintTester from 'textlint-tester';
+import rule from '../src/no-dead-link';
 
 const tester = new TextlintTester();
 
