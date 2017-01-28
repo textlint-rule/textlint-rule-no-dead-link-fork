@@ -2,6 +2,9 @@
   "name": "textlint-rule-no-dead-link",
   "version": "3.0.1",
   "description": "A textlint rule to check if all links are alive",
+  "engines" : {
+    "node" : ">=6"
+  },
   "main": "lib/no-dead-link.js",
   "scripts": {
     "build": "babel src -d lib --source-maps",
@@ -30,15 +33,13 @@
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-core": "^6.9.1",
-    "babel-plugin-espower": "^2.2.0",
-    "babel-plugin-transform-async-to-generator": "^6.8.0",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-power-assert": "^1.0.0",
     "eslint": "^3.14.1",
     "eslint-config-airbnb-base": "^11.0.1",
     "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
-    "power-assert": "^1.4.1",
     "textlint": "^7.2.1",
     "textlint-tester": "^2.1.0"
   }
