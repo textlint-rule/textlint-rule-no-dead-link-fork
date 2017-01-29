@@ -1,11 +1,12 @@
 # textlint-rule-no-dead-link
 
+[![textlint rule](https://img.shields.io/badge/textlint-fixable-green.svg?style=social)](https://textlint.github.io/)
 [![Build Status](https://travis-ci.org/nodaguti/textlint-rule-no-dead-link.svg?branch=master)](https://travis-ci.org/nodaguti/textlint-rule-no-dead-link)
 [![Dependency Status](https://david-dm.org/nodaguti/textlint-rule-no-dead-link.svg)](https://david-dm.org/nodaguti/textlint-rule-no-dead-link)
 [![devDependency Status](https://david-dm.org/nodaguti/textlint-rule-no-dead-link/dev-status.svg)](https://david-dm.org/nodaguti/textlint-rule-no-dead-link#info=devDependencies)
 
 [textlint](https://github.com/textlint/textlint) rule
-to make sure every links is available.
+to make sure every link in a document is available.
 
 The primary target of this rule is Markdown documents, while it may also work for plain text documents (See tests).
 
@@ -21,7 +22,7 @@ $ textlint --rule textlint-rule-no-dead-link text-to-check.txt
 ```
 
 ## Options
-Please write your configurations into `.textlintrc`.
+Please write your configurations in `.textlintrc`.
 
 The default options are:
 ```
@@ -38,10 +39,10 @@ The default options are:
 
 ### checkRelative
 Enable the dead link checks against relative URIs.
-Note that you also have to specify the `baseURI` to work this option.
+Note that you also have to specify the `baseURI` to make this option work.
 
 ### baseURI
-The base URI to use for all relative URIs contained within a document.
+The base URI to be used for resolving relative URIs.
 
 Example:
 ```
@@ -56,7 +57,7 @@ Example:
 ```
 
 ### ignore
-An array of URI string to be ignored, i.e. skipped from availability checks.
+An array of URIs to be ignored, i.e. skipped from availability checks.
 
 Example:
 ```
