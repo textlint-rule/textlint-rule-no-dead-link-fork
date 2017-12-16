@@ -5,7 +5,7 @@
 [![Dependency Status](https://david-dm.org/textlint-rule/textlint-rule-no-dead-link-fork.svg)](https://david-dm.org/textlint-rule/textlint-rule-no-dead-link-fork)
 [![devDependency Status](https://david-dm.org/textlint-rule/textlint-rule-no-dead-link-fork/dev-status.svg)](https://david-dm.org/textlint-rule/textlint-rule-no-dead-link-fork#info=devDependencies)
 
-> This is fork of [nodaguti/textlint-rule-no-dead-link](https://github.com/nodaguti/textlint-rule-no-dead-link "nodaguti/textlint-rule-no-dead-link")
+> This is fork of [nodaguti/textlint-rule-no-dead-link](https://github.com/nodaguti/textlint-rule-no-dead-link "nodaguti/textlint-rule-no-dead-link").  
 > For more details, see [Temporary fork · Issue #1 · textlint-rule/textlint-rule-no-dead-link-fork](https://github.com/textlint-rule/textlint-rule-no-dead-link-fork/issues/1 "Temporary fork · Issue #1 · textlint-rule/textlint-rule-no-dead-link-fork").
 
 [textlint](https://github.com/textlint/textlint) rule
