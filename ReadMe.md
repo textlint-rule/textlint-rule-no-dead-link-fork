@@ -12,7 +12,7 @@ The primary target of this rule is Markdown documents, while it may also work fo
 
 ## Installation
 ```
-$ npm install textlint-rule-no-dead-link
+$ npm install @textlint-rule/textlint-rule-no-dead-link
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ The default options are:
 ```
 {
   "rules": {
-    "no-dead-link": {
+    "@textlint-rule/no-dead-link": {
       "checkRelative": false,
       "baseURI": null,
       "ignore": [],
@@ -48,7 +48,7 @@ Example:
 ```
 {
   "rules": {
-    "no-dead-link": {
+    "@textlint-rule/no-dead-link": {
       "checkRelative": true,
       "baseURI": "http://example.com/"
     }
@@ -63,7 +63,7 @@ Example:
 ```
 {
   "rules": {
-    "no-dead-link": {
+    "@textlint-rule/no-dead-link": {
       "ignore": [
         "http://example.com/not-exist/index.html"
       ]

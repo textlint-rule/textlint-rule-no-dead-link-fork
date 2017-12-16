@@ -1,5 +1,5 @@
 {
-  "name": "textlint-rule-no-dead-link",
+  "name": "@textlint-rule/textlint-rule-no-dead-link",
   "version": "3.1.1",
   "description": "A textlint rule to check if all links are alive",
   "engines": {
