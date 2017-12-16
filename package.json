@@ -1,5 +1,5 @@
 {
-  "name": "textlint-rule-no-dead-link",
+  "name": "@textlint-rule/textlint-rule-no-dead-link",
   "version": "3.1.1",
   "description": "A textlint rule to check if all links are alive",
   "engines": {
@@ -23,9 +23,9 @@
   ],
   "author": "nodaguti",
   "license": "MIT",
-  "bugs": "https://github.com/nodaguti/textlint-rule-no-dead-link/issues",
-  "homepage": "https://github.com/nodaguti/textlint-rule-no-dead-link",
-  "repository": "nodaguti/textlint-rule-no-dead-link",
+  "bugs": "https://github.com/textlint-rule/textlint-rule-no-dead-link-fork/issues",
+  "homepage": "https://github.com/textlint-rule/textlint-rule-no-dead-link-fork",
+  "repository": "textlint-rule/textlint-rule-no-dead-link-fork",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "textlint-rule-helper": "^2.0.0"
