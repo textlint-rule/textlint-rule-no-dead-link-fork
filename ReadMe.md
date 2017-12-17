@@ -41,8 +41,15 @@ The default options are:
 ```
 
 ### checkRelative
-Enable the dead link checks against relative URIs.
-Note that you also have to specify the `baseURI` to make this option work.
+Enable the dead link checks against relative URIs or file path.
+
+**Relative url**
+
+You also have to specify the `baseURI` to make this option work.
+
+**Relative file path**
+
+You do not need to set `baseURI` option.
 
 ### baseURI
 The base URI to be used for resolving relative URIs.

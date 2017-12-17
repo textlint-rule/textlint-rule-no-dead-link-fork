@@ -2,9 +2,12 @@ import { RuleHelper } from 'textlint-rule-helper';
 import fetch from 'isomorphic-fetch';
 import URL from 'url';
 
+const fs = require('fs');
+const path = require('path');
+
 const DEFAULT_OPTIONS = {
   checkRelative: false,  // should check relative URLs.
-  baseURI: null,  // a base URI to resolve a relative URL.
+  baseURI: null,  // a base URI to resolve a relative URL or file path.
   ignore: [],  // URIs to be skipped from availability checks.
 };
 
@@ -82,7 +85,7 @@ function reporter(context, options = {}) {
     getSource,
     report,
     RuleError,
-    fixer,
+    fixer, getFilePath,
   } = context;
   const helper = new RuleHelper(context);
   const opts = Object.assign({}, DEFAULT_OPTIONS, options);
@@ -103,9 +106,19 @@ function reporter(context, options = {}) {
         return;
       }
 
+      // if not defined, relative link lookup local path
       if (!opts.baseURI) {
-        const message = 'The base URI is not specified.';
-        report(node, new RuleError(message, { index: 0 }));
+        const filePath = getFilePath();
+        if (!filePath) {
+          return;
+        }
+        const targetFile = path.resolve(path.dirname(filePath), uri.replace(/[?|#].*$/, ''));
+        const existsSync = fs.existsSync(targetFile);
+        if (!existsSync) {
+          report(node, new RuleError(`${targetFile} is not found.`, {
+            index,
+          }));
+        }
         return;
       }
 

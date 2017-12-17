@@ -2,6 +2,9 @@
 import TextlintTester from 'textlint-tester';
 import rule from '../src/no-dead-link';
 
+const fs = require('fs');
+const path = require('path');
+
 const tester = new TextlintTester();
 
 tester.run('no-dead-link', rule, {
@@ -28,6 +31,13 @@ tester.run('no-dead-link', rule, {
       text: 'should ignore URLs in the "ignore" option: https://example.com/404.html shouldn\'t be checked.',
       options: {
         ignore: ['https://example.com/404.html'],
+      },
+    },
+    // relative file path
+    {
+      text: fs.readFileSync(path.join(__dirname, 'fixtures/a.md'), 'utf-8'),
+      options: {
+        checkRelative: true,
       },
     },
   ],
@@ -96,18 +106,20 @@ tester.run('no-dead-link', rule, {
         },
       ],
     },
-    {
-      text: 'should throw "No base URI is provided" error if checkRelative is true but baseURI is undefined: [no base](index.html)',
-      options: {
-        checkRelative: true,
-      },
-      errors: [
-        {
-          message: 'The base URI is not specified.',
-          line: 1,
-          column: 97,
-        },
-      ],
-    },
+    // relative file path
+    // TODO: tester should support file path
+    // {
+    //   text: fs.readFileSync(path.join(__dirname, 'fixtures/b.md'), 'utf-8'),
+    //   options: {
+    //     checkRelative: true,
+    //   },
+    //   errors: [{
+    //     line: 1,
+    //   }, {
+    //     line: 1,
+    //   }, {
+    //     line: 1,
+    //   }],
+    // },
   ],
 });
